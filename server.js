@@ -28,9 +28,9 @@ var BookmarkSchema = new mongoose.Schema({
 var Bookmark = mongoose.model('Bookmark', BookmarkSchema);
 
 // Connect
-db = mongoose.connect('mongodb://localhost/bookmark-manager');
+// db = mongoose.connect('mongodb://localhost/bookmark-manager');
 
-// db = mongoose.connect(process.env.MONGOLAB_URI);
+db = mongoose.connect(process.env.MONGOLAB_URI);
 
 /**
  *  CONFIGURATIONS
