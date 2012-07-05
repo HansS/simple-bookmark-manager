@@ -437,6 +437,7 @@ $(function() {
               App.tagListView.tags = App.bookmarkListView.tags;
               App.tagListView.render();
             }
+
           })
 
           // Clear input
@@ -645,6 +646,7 @@ var BookmarkUpdaterView = Backbone.View.extend({
       this.initBookmarkListView();
       this.initAddBookmarkView();
       this.initUpdateBookmarkView();
+      this.initTagListView([]);
     },
 
     initBookmarkListView: function() {
