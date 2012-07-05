@@ -310,8 +310,9 @@ $(function() {
           // remove on client side models
           self.bookmarks.remove(bookmark);
 
-          this.processBookmarks();
+          self.processBookmarks();
 
+          App.tagListView.tags = this.tags;
           App.tagListView.render();
         }
       });
