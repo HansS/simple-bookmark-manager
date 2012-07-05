@@ -1,0 +1,51 @@
+// App Home Page
+div.container#app
+    div.span2.tags.well
+      h1 Tags
+      #tags
+        ul.nav.nav-pills
+    div.span5.bookmarks.well
+      i.icon-wrench.icon-white.close
+      h1 Bookmarks
+      #bookmarks
+        ul.nav.nav-pills
+    div.span3.bookmarks-adder.well
+      h1 Add New Bookmark
+      fieldset
+        input.url(type="text", placeholder="url")
+        div.tag(style="width: 220px;")
+          ul.tags-selected
+            li.tag-input-field
+              input.tag-entry(type="text", autocomplete="off", style="width: 100px", placeholder="tag")
+        span(style="font-size: 10px; color: white; float:left;") *enter comma to confirm tag
+      button.btn.save-bookmark Save
+    div.span3.bookmarks-updater.well.hide
+      h1 Update Bookmark
+      fieldset
+        input.url(type="text", placeholder="url")
+        div.tag.update(style="width: 220px;")
+          ul.tags-selected.update
+            li.tag-input-field.update
+              input.tag-entry.update(type="text", autocomplete="off", style="width: 100px", placeholder="tag")
+        span(style="font-size: 10px; color: white; float:left;") *enter comma to confirm tag
+      button.btn.update-bookmark Save
+
+
+// Templates
+script(type="text/template", id="bookmark-view-template")
+  li
+    div.bookmark-menu.hide
+      i.icon-remove.icon-white.close
+        a.delete-bookmark.close x
+      i.icon-pencil.icon-white.close
+        a.update-bookmark.close
+    a(href="#", target="_blank") <%= url %>
+    h5 <%= tags %>
+
+script(type="text/template", id="tag-view-template")
+  li.tag-li
+    a.tag(href="#") <%= tag %>
+
+script(type="text/template", id="tag-selected-template")
+  li.selected-tag
+    span <%= tagEntered %>
