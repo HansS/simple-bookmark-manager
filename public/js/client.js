@@ -189,7 +189,7 @@ $(function() {
     addBookmark: function(bookmark) {
       var bookmark = new BookmarkView(bookmark);
 
-      var tagChose = App.tagListView.tagChosen;
+      var tagChose = App.tagListView ? App.tagListView.tagChosen : undefined;
 
       if (_.indexOf(bookmark.attributes.tags.split(","), tagChose) != -1 || tagChose === null) {
         $("#bookmarks ul").append(bookmark.el);
