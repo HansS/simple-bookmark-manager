@@ -146,20 +146,13 @@ $(function() {
       $("#tags li").removeClass("active");
       $($(e.currentTarget).parent()).addClass("active");
 
-      // if (this.tags.indexOf(",") === -1) {
-      //   var bookmarks = this.tags;
-      // }
-      // else {
-      //   var bookmarks = _.uniq(_.reduce(_.pluck(this.tags.toJSON(), "bookmarks"), function(memo, b) {
+      // var bookmarks = this.tags.indexOf(",") === -1 ? this.tags : _.uniq(_.reduce(_.pluck(this.tags.toJSON(), "bookmarks"), function(memo, b) {
       //     return memo + "," + b;
       //   }).split(","));
-      // }
-      
-      var bookmarks = this.tags.indexOf(",") === -1 ? this.tags : _.uniq(_.reduce(_.pluck(this.tags.toJSON(), "bookmarks"), function(memo, b) {
-          return memo + "," + b;
-        }).split(","));
 
-      App.bookmarkListView.renderBookmarksByTag(bookmarks);
+      // App.bookmarkListView.renderBookmarksByTag(bookmarks);
+
+      App.bookmarkListView.renderAllBookmarks();
 
     }
 
@@ -311,8 +304,8 @@ $(function() {
       var self = this;
 
       $.ajax({
-        url: "/api/bookmarks/" + bookmark.get("_id"),
-        type: "DELETE",
+        url: "/api/delete/bookmarks/" + bookmark.get("_id"),
+        type: "POST",
         success: function(data, textStatus, jqXHR) {
           // remove on client side models
           self.bookmarks.remove(bookmark);
@@ -413,9 +406,15 @@ $(function() {
     saveBookmark: function(e) {
       var url = $("input.url").val();
 
-        var tags = $(".tags-selected li span").html().indexOf(",") === -1 ? $(".tags-selected li span").html() : _.map($(".tags-selected li span"), function(tag) {
-        return $(tag).html();
-      }).join(",");
+        // console.log($(".tags-selected li span"))
+      //   var tags = $(".tags-selected li span").html().indexOf(",") === -1 ? $(".tags-selected li span").html() : _.map($(".tags-selected li span"), function(tag) {
+      //   return $(tag).html();
+      // }).join(",");
+
+        var tags = _.map($(".tags-selected.update li span"), function(tag) {
+          return $(tag).html();
+        }).join(",");
+
 
       // if not empty, save
       if (url && tags) {
@@ -558,8 +557,8 @@ var BookmarkUpdaterView = Backbone.View.extend({
       if (validUrl) {
         // Update a single bookmark
         $.ajax({
-          url: "/api/bookmarks/" + self.bookmark.get("_id"),
-          type: "PUT",
+          url: "/api/update/bookmarks/" + self.bookmark.get("_id"),
+          type: "POST",
           data: {
               "url": url
             , "tags": tags
@@ -650,7 +649,6 @@ var BookmarkUpdaterView = Backbone.View.extend({
       this.initBookmarkListView();
       this.initAddBookmarkView();
       this.initUpdateBookmarkView();
-      this.initTagListView(null);
     },
 
     initBookmarkListView: function() {
@@ -694,8 +692,8 @@ var BookmarkUpdaterView = Backbone.View.extend({
   // });
   // Update a single bookmark
   // $.ajax({
-  //   url: "/api/bookmarks/4fecd7decfaa572603000008",
-  //   type: "PUT",
+  //   url: "/api/update/bookmarks/4fecd7decfaa572603000008",
+  //   type: "POST",
   //   data: {
   //       "url": "www.backbonejs.org"
   //     , "tags": "mvc;backbonejs;javascript;jQuery"
@@ -706,8 +704,8 @@ var BookmarkUpdaterView = Backbone.View.extend({
   // });
   // Delete
   // $.ajax({
-  //   url: "/api/bookmarks/4fecd6f3cfaa572603000002",
-  //   type: "DELETE",
+  //   url: "/api/delete/bookmarks/4fecd6f3cfaa572603000002",
+  //   type: "POST",
   //   success: function(data, textStatus, jqXHR) {
   //     console.log(data);
   //   }

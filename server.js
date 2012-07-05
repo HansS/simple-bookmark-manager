@@ -97,7 +97,7 @@ app.get('/api/bookmarks/:id', function(req, res) {
 });
 
 // Update bookmark
-app.put('/api/bookmarks/:id', function(req, res) {
+app.post('/api/update/bookmarks/:id', function(req, res) {
   return Bookmark.findById(req.params.id, function(err, bookmark) {
     bookmark.url = req.body.url;
     bookmark.tags = req.body.tags;
@@ -132,7 +132,7 @@ app.post('/api/bookmarks', function(req, res) {
 });
 
 // Delete bookmark
-app.delete('/api/bookmarks/:id', function(req, res) {
+app.post('/api/delete/bookmarks/:id', function(req, res) {
   return Bookmark.findById(req.params.id, function(err, bookmark) {
     return bookmark.remove(function(err) {
       if (!err) {
