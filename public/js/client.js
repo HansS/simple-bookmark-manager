@@ -312,7 +312,7 @@ $(function() {
 
           self.processBookmarks();
 
-          App.tagListView.tags = this.tags;
+          App.tagListView.tags = self.tags;
           App.tagListView.render();
         }
       });
