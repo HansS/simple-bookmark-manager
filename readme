@@ -1,0 +1,5 @@
+A very simple bookmark manager app that implements basic CRUD operations on bookmarks.
+
+Built on Backbone.js + Express + Twitter Bootstrap + Jade + Mongoose + MongoDB
+
+Deployed at http://evening-leaf-2223.herokuapp.com/
