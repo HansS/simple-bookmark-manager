@@ -309,6 +309,10 @@ $(function() {
         success: function(data, textStatus, jqXHR) {
           // remove on client side models
           self.bookmarks.remove(bookmark);
+
+          this.processBookmarks();
+
+          App.tagListView.render();
         }
       });
 
