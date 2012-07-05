@@ -646,7 +646,7 @@ var BookmarkUpdaterView = Backbone.View.extend({
       this.initBookmarkListView();
       this.initAddBookmarkView();
       this.initUpdateBookmarkView();
-      this.initTagListView([]);
+      this.initTagListView(null);
     },
 
     initBookmarkListView: function() {
