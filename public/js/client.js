@@ -59,14 +59,8 @@ $(function() {
       }).replace("#", this.bookmark.get("url"));
       this.el = bookmarkview;
       return this;
-    },
-
-    removeBookmark: function() {
-      console.log(this)
-      // this.destroy();
-
-      // $(this.el).remove
     }
+
 
   });
 
@@ -152,9 +146,18 @@ $(function() {
       $("#tags li").removeClass("active");
       $($(e.currentTarget).parent()).addClass("active");
 
-      var bookmarks = _.uniq(_.reduce(_.pluck(this.tags.toJSON(), "bookmarks"), function(memo, b) {
-        return memo + "," + b;
-      }).split(","));
+      // if (this.tags.indexOf(",") === -1) {
+      //   var bookmarks = this.tags;
+      // }
+      // else {
+      //   var bookmarks = _.uniq(_.reduce(_.pluck(this.tags.toJSON(), "bookmarks"), function(memo, b) {
+      //     return memo + "," + b;
+      //   }).split(","));
+      // }
+      
+      var bookmarks = this.tags.indexOf(",") === -1 ? this.tags : _.uniq(_.reduce(_.pluck(this.tags.toJSON(), "bookmarks"), function(memo, b) {
+          return memo + "," + b;
+        }).split(","));
 
       App.bookmarkListView.renderBookmarksByTag(bookmarks);
 
@@ -409,7 +412,8 @@ $(function() {
 
     saveBookmark: function(e) {
       var url = $("input.url").val();
-      var tags = _.map($(".tags-selected li span"), function(tag) {
+
+        var tags = $(".tags-selected li span").html().indexOf(",") === -1 ? $(".tags-selected li span").html() : _.map($(".tags-selected li span"), function(tag) {
         return $(tag).html();
       }).join(",");
 
