@@ -431,7 +431,7 @@ $(function() {
 
             // Re render tag list
             if (!App.tagListView) {
-              App.initTagEntry(App.bookmarkListView.tags);
+              App.initTagListView(App.bookmarkListView.tags);
             }
             else {
               App.tagListView.tags = App.bookmarkListView.tags;
